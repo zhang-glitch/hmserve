@@ -18,7 +18,7 @@ function mergeConfig (config) {
 class Server{
   constructor(config) {
     this.config = mergeConfig(config)
-    // console.log(this.config)
+    // console.log("config", this.config)
   }
   start() {
     let server = http.createServer(this.serveHandle.bind(this))
@@ -73,6 +73,7 @@ class Server{
   fileHandle(req, res, abspath) {
     res.statusCode = 200
     res.setHeader('Content-type', mime.getType(abspath) + ';charset=utf-8')
+    res.setHeader("Access-Control-Allow-Origin", "*");
     createReadStream(abspath).pipe(res)
   }
 }
